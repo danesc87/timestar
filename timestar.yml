@@ -1,0 +1,30 @@
+# This value represents the task that user is currently working on
+task_name: Programming
+# Number of timers before Timestar runs the big break and ask user 
+# about repeat the whole pomodoro
+number_of_timers: 2
+# Time values are in SECONDS
+# 300 -> 5 minutes
+time_values:
+  # Task duration
+  task: 1
+  # Break duration between to tasks
+  small_break: 1
+  # Last break duration before pomodoro ends
+  big_break: 2
+
+# Custom messages to see when a task or pomodoro is end
+# Following page can be consulted for multiline strings 
+# https://yaml-multiline.info/
+notification_messages:
+  # Message between tasks
+  small_break: "Task finished\nHave a little break"
+  # Message when all tasks are finished
+  big_break: Already completed all taks in this pomodoro session
+
+# Custom messages of timestar
+app_messages:
+  # Repetition message when the whole pomodoro is finished
+  repeat_tasks: Do you want to repeat pomodoros?
+  # Message when the whole pomodoro is finished
+  all_tasks_finished: Timestar finished!
