@@ -1,7 +1,6 @@
 mod configuration;
 mod timestar_notification;
 
-use std::env::args;
 use timestar_notification::run_timer_and_notify;
 use configuration::settings::Settings;
 
@@ -13,12 +12,26 @@ extern crate serde_derive;
 
 
 fn main() {
-    // TODO Allow argunments for special cases
-    let args: Vec<String> = args().collect();
-    if args.len() > 1 {
-         let _argument = &args[1];
-    }
-
     let timestar_settings = Settings::new().unwrap();
-    run_timer_and_notify(timestar_settings);
+    run_timer_and_notify(
+        timestar_settings,
+        parse_timestar_repetition_argument(
+            std::env::args().collect()
+        )
+    );
+}
+
+
+fn parse_timestar_repetition_argument(args: Vec<String>)-> u8 {
+    let mut repeat: u8 = 0;
+    if args.len() > 1 {
+        match args[1].parse::<u8>() {
+            Ok(r) => repeat = r,
+            Err(_) =>  {
+                println!("Argument must be a postivie integer");
+                std::process::exit(1);
+            }
+        }
+    };
+    repeat
 }
